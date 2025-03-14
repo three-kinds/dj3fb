@@ -1,8 +1,0 @@
-[run]
-source =
-    dj3fb
-
-[report]
-exclude_lines =
-    raise NotImplementedError
-    raise AssertionError

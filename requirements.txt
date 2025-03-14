@@ -1,7 +1,3 @@
-a3faker >= 0.1.0
-
-# 测试与维护
 django
+faker
 factory_boy
-coverage >= 6.3.2
-twine

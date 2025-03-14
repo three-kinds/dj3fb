@@ -1,8 +1,8 @@
 # dj3fb
 
-It's just a thin wrapper of factory_boy.
+English | [简体中文](README_ZH.md)
 
-[History.](HISTORY.md)
+`dj3fb` can generate `DjangoModelFactory` for your django models by using `factory_boy`.
 
 ## Install
 
