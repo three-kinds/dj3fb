@@ -11,7 +11,7 @@ class Actor(models.Model):
     age = models.IntegerField(null=True)
 
     class Meta:
-        verbose_name = _('演员')
+        verbose_name = _("演员")
 
 
 class Licence(models.Model):
@@ -25,4 +25,4 @@ class Movie(models.Model):
     licence = models.OneToOneField(Licence, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        verbose_name = _('电影')
+        verbose_name = _("电影")

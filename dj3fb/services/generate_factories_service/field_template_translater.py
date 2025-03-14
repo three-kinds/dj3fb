@@ -2,11 +2,30 @@
 from typing import Dict, Type
 from django.db import models
 
-from .field_templates import BaseFieldTemplate,  IntegerFieldTemplate, BinaryFieldTemplate, BooleanFieldTemplate, \
-    CharFieldTemplate, DateFieldTemplate, DateTimeFieldTemplate, DecimalFieldTemplate, DurationFieldTemplate, \
-    EmailFieldTemplate, FileFieldTemplate, FilePathFieldTemplate, FloatFieldTemplate, GenericIPAddressFieldTemplate, \
-    ImageFieldTemplate, JSONFieldTemplate, TextFieldTemplate, TimeFieldTemplate, \
-    URLFieldTemplate, UUIDFieldTemplate, BigIntegerFieldTemplate, SmallIntegerFieldTemplate
+from .field_templates import (
+    BaseFieldTemplate,
+    IntegerFieldTemplate,
+    BinaryFieldTemplate,
+    BooleanFieldTemplate,
+    CharFieldTemplate,
+    DateFieldTemplate,
+    DateTimeFieldTemplate,
+    DecimalFieldTemplate,
+    DurationFieldTemplate,
+    EmailFieldTemplate,
+    FileFieldTemplate,
+    FilePathFieldTemplate,
+    FloatFieldTemplate,
+    GenericIPAddressFieldTemplate,
+    ImageFieldTemplate,
+    JSONFieldTemplate,
+    TextFieldTemplate,
+    TimeFieldTemplate,
+    URLFieldTemplate,
+    UUIDFieldTemplate,
+    BigIntegerFieldTemplate,
+    SmallIntegerFieldTemplate,
+)
 
 
 class FieldTemplateTranslater:
