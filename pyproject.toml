@@ -10,6 +10,8 @@ dependencies = [
     "django",
     "faker",
     "factory_boy",
+    "a3py",
+    "lazy-object-proxy",
 ]
 authors = [
   {name = "three-kinds", email = "3179158552@qq.com"},
