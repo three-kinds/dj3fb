@@ -2,6 +2,7 @@
 import abc
 from typing import Tuple, Optional
 from django.db import models
+from django.contrib.postgres import fields as pg_fields
 
 
 class BaseFieldTemplate(abc.ABC):
@@ -156,3 +157,16 @@ class UUIDFieldTemplate(BaseFieldTemplate):
     def get_fake_expression(self) -> Tuple[Optional[str], str]:
         s = f"f.uuid4()"
         return self.f_lib, f"factory.Sequence(lambda _: {s})"
+
+
+# pg_fields
+
+class ArrayFieldTemplate(BaseFieldTemplate):
+    field: pg_fields.ArrayField
+
+    def get_fake_expression(self) -> Tuple[Optional[str], str]:
+        if self.field.size is not None:
+            size = self.field.size
+        else:
+            size = 3
+        return self.f_lib, f"factory.Sequence(lambda _: [ for _ in range({size})])"
