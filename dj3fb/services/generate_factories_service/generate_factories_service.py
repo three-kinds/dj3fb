@@ -11,7 +11,7 @@ from django.db.models.options import Options
 from a3py.simplified.case import camel2snake
 
 from .factory_template import FactoryTemplate
-from .field_template_translater import FieldTemplateTranslater
+from .field_template_manager import FieldTemplateManager
 
 """
 
@@ -101,7 +101,7 @@ class GenerateFactoriesService:
         template.add_class_and_meta(model.__name__)
 
         for field_name, field_instance in common_fields.items():
-            field_template = FieldTemplateTranslater.translate(field_instance)
+            field_template = FieldTemplateManager.get_field_template_instance(field_instance)
             custom_lib, fake_expression = field_template.get_fake_expression()
             template.add_common_field(field_name=field_name, fake_expression=fake_expression)
             if custom_lib is not None:

@@ -5,7 +5,7 @@ from django.contrib.postgres import fields as pg_fields
 
 from dj3fb.services.generate_factories_service import field_templates as ft
 
-class FieldTemplateTranslater:
+class FieldTemplateManager:
     cached_mappings = dict()
     mappings: Dict[Type[models.Field], Type[ft.BaseFieldTemplate]] = {
         models.BigIntegerField: ft.BigIntegerFieldTemplate,
@@ -38,12 +38,16 @@ class FieldTemplateTranslater:
     }
 
     @classmethod
-    def translate(cls, field_instance: models.Field) -> ft.BaseFieldTemplate:
+    def get_field_template_instance(cls, field_instance: models.Field) -> ft.BaseFieldTemplate:
         field_template_cls = cls._get_field_template_cls(type(field_instance))
-        return field_template_cls(field_instance)
+        if isinstance(field_instance, pg_fields.ArrayField):
+            base_field_template = cls.get_field_template_instance(field_instance.base_field)
+            return field_template_cls(field_instance, base_field_template)
+        else:
+            return field_template_cls(field_instance)
 
     @classmethod
-    def _get_field_template_cls(cls, field_cls) -> Type[ft.BaseFieldTemplate]:
+    def _get_field_template_cls(cls, field_cls) -> Type[ft.BaseFieldTemplate | ft.ArrayFieldTemplate]:
         cls_name = field_cls.__name__
 
         cache_result = cls.cached_mappings.get(cls_name, None)
