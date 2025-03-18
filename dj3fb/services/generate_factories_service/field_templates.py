@@ -21,29 +21,32 @@ class BaseFieldTemplate(abc.ABC):
 
 
 class SmallIntegerFieldTemplate(BaseFieldTemplate):
-    delta = 0
+    min_value = 0
+    max_value = 255
 
     def get_fake_expression(self) -> Tuple[Optional[str], str]:
         if self.field.choices is not None:
             choices = [k for k, _ in self.field.choices]
             return None, f"factory.Iterator({str(choices)})"
         else:
-            return None, f"factory.Sequence(lambda n: n + {self.delta})"
+            return self.f_lib, f"factory.Sequence(lambda _: f.pyint({self.min_value}, {self.max_value}))"
 
     def get_list_item_expression(self) -> str:
         if self.field.choices is not None:
             choices = [k for k, _ in self.field.choices]
             return f"random.choice({str(choices)})"
         else:
-            return f"n + m + {self.delta}"
+            return f"f.pyint({self.min_value}, {self.max_value})"
 
 
 class IntegerFieldTemplate(SmallIntegerFieldTemplate):
-    delta = 10000
+    min_value = 10000
+    max_value = 99999
 
 
 class BigIntegerFieldTemplate(SmallIntegerFieldTemplate):
-    delta = 100000000
+    min_value = 100000000
+    max_value = 999999999
 
 
 class BinaryFieldTemplate(BaseFieldTemplate):
@@ -225,7 +228,7 @@ class ArrayFieldTemplate(BaseFieldTemplate):
         self.base_field_template = base_field_template
 
     def get_fake_expression(self) -> Tuple[Optional[str], str]:
-        return self.f_lib, f"factory.Sequence(lambda n: {self.get_list_item_expression()})"
+        return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
         if self.field.size is not None:
@@ -233,4 +236,4 @@ class ArrayFieldTemplate(BaseFieldTemplate):
         else:
             size = 3
 
-        return f"[{self.base_field_template.get_list_item_expression()} for m in range({size})]"
+        return f"[{self.base_field_template.get_list_item_expression()} for _ in range({size})]"
