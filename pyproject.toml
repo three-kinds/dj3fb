@@ -45,14 +45,6 @@ version = {attr = "dj3fb.__version__"}
 [tool.setuptools.packages.find]
 include = ["dj3fb*"]
 
-[tool.coverage.run]
-source = ["dj3fb"]
-
-[tool.coverage.report]
-exclude_lines = [
-    "raise NotImplementedError"
-]
-
 [tool.mypy]
 packages = [
     "dj3fb",

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import abc
-from typing import Tuple, Optional
+from typing import Tuple, Optional, TYPE_CHECKING
 from django.db import models
-from django.contrib.postgres import fields as pg_fields
+
+if TYPE_CHECKING:
+    from django.contrib.postgres import fields as pg_fields
 
 
 class BaseFieldTemplate(abc.ABC):
@@ -221,7 +223,8 @@ class UUIDFieldTemplate(BaseFieldTemplate):
 # pg_fields
 
 class ArrayFieldTemplate(BaseFieldTemplate):
-    field: pg_fields.ArrayField
+    if TYPE_CHECKING:
+        field: pg_fields.ArrayField
 
     def __init__(self, field: models.Field, base_field_template: BaseFieldTemplate):
         super().__init__(field)

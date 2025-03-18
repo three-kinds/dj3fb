@@ -9,4 +9,4 @@ class ActorFactory(factory.django.DjangoModelFactory):
         model = Actor
 
     name = factory.Sequence(lambda _: f.pystr(max_chars=32))
-    age = factory.Sequence(lambda n: n + 10000)
+    age = factory.Sequence(lambda _: f.pyint(10000, 99999))
