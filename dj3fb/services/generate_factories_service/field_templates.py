@@ -36,7 +36,7 @@ class SmallIntegerFieldTemplate(BaseFieldTemplate):
     def get_list_item_expression(self) -> str:
         if self.field.choices is not None:
             choices = [k for k, _ in self.field.choices]
-            return f"random.choice({str(choices)})"
+            return f"f.random_element({str(choices)})"
         else:
             return f"f.pyint({self.min_value}, {self.max_value})"
 
@@ -80,7 +80,7 @@ class CharFieldTemplate(BaseFieldTemplate):
     def get_list_item_expression(self) -> str:
         if self.field.choices is not None:
             choices = [k for k, _ in self.field.choices]
-            return f"random.choice({str(choices)})"
+            return f"f.random_element({str(choices)})"
         else:
             return f"f.pystr(max_chars={self.field.max_length or 32})"
 

@@ -7,3 +7,4 @@ mypy >= 1.14.0
 tox >= 4.23.2
 
 psycopg2-binary
+pillow
