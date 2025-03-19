@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from typing import Dict, List, Type, Optional
+from typing import List, Type, Optional
 from collections import defaultdict
 from django.conf import settings
 from django.db import models
@@ -30,14 +30,14 @@ DJ3FB = {
 class GenerateFactoriesService:
     def __init__(self):
         conf = getattr(settings, "DJ3FB", dict())
-        self.include_third_party_apps: List[str] = conf.get("include_third_party_apps", list())
-        self.existed_factories: Dict[str, str] = conf.get("existed_factories", dict())
+        self.include_third_party_apps = conf.get("include_third_party_apps", list())
+        self.existed_factories = conf.get("existed_factories", dict())
 
         self._app_label2factories = defaultdict(list)
         self._app_label2app_name = dict()
 
     def start(self):
-        target_apps: List[AppConfig] = self._get_target_apps()
+        target_apps = self._get_target_apps()
         for app in target_apps:
             model_list = list(app.get_models())
             if len(model_list) == 0:

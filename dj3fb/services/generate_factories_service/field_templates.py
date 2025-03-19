@@ -155,7 +155,7 @@ class FloatFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.pyfloat()"
+        return "f.pyfloat()"
 
 
 class GenericIPAddressFieldTemplate(BaseFieldTemplate):
@@ -174,7 +174,7 @@ class GenericIPAddressFieldTemplate(BaseFieldTemplate):
 
 class ImageFieldTemplate(BaseFieldTemplate):
     def get_fake_expression(self) -> Tuple[Optional[str], str]:
-        return None, f"factory.django.ImageField()"
+        return None, "factory.django.ImageField()"
 
     def get_list_item_expression(self) -> str:
         raise AssertionError("ImageField is not supported")
@@ -185,7 +185,7 @@ class JSONFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.json()"
+        return "f.json()"
 
 
 class TextFieldTemplate(BaseFieldTemplate):
@@ -193,7 +193,7 @@ class TextFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.text()"
+        return "f.text()"
 
 
 class TimeFieldTemplate(BaseFieldTemplate):
@@ -201,7 +201,7 @@ class TimeFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.time()"
+        return "f.time()"
 
 
 class URLFieldTemplate(BaseFieldTemplate):
@@ -209,7 +209,7 @@ class URLFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.url()"
+        return "f.url()"
 
 
 class UUIDFieldTemplate(BaseFieldTemplate):
@@ -217,7 +217,7 @@ class UUIDFieldTemplate(BaseFieldTemplate):
         return self.f_lib, f"factory.Sequence(lambda _: {self.get_list_item_expression()})"
 
     def get_list_item_expression(self) -> str:
-        return f"f.uuid4()"
+        return "f.uuid4()"
 
 
 # pg_fields

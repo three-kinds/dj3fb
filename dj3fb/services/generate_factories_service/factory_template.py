@@ -33,7 +33,9 @@ _M2M_FIELD = """
 """
 
 
-def build_triple_quote(s: str, format_dict: dict = None, clean_left: bool = True, clean_right: bool = False) -> str:
+def build_triple_quote(
+    s: str, format_dict: dict | None = None, clean_left: bool = True, clean_right: bool = False
+) -> str:
     if clean_left:
         s = s[1:]
     if clean_right:

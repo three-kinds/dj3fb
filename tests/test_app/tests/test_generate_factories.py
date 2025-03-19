@@ -20,3 +20,6 @@ class T(TestCase):
         self.assertEqual(len([name for name in os.listdir(target_dir) if name.endswith(".py")]), 2)
         call_command("generate_factories")
         self.assertEqual(len([name for name in os.listdir(target_dir) if name.endswith(".py")]), 7)
+
+        shutil.rmtree(target_dir)
+        shutil.copytree(bak_dir, target_dir)

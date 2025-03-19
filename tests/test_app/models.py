@@ -44,6 +44,6 @@ class Movie(models.Model):
 
 
 class Cinema(models.Model):
-    int_array = ArrayField(models.IntegerField(), size=5)
+    nested_int_array = ArrayField(ArrayField(models.IntegerField(), size=4), size=5)
     int_choice_array = ArrayField(models.IntegerField(choices=[(i, i) for i in range(10)]), size=5)
     char_choice_array = ArrayField(models.CharField(choices=[("A", "A"), ("B", "B")], max_length=1))

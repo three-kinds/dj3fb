@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import importlib.util
 from typing import Dict, Type
 from django.db import models
 
@@ -32,8 +33,7 @@ _mappings: Dict[Type[models.Field], Type[ft.BaseFieldTemplate]] = {
     models.UUIDField: ft.UUIDFieldTemplate,
 }
 
-try:
-    import psycopg2
+if importlib.util.find_spec("psycopg2") is not None:
     from django.contrib.postgres import fields as pg_fields
 
     _mappings.update(
@@ -43,20 +43,21 @@ try:
         }
     )
     POSTGRES_SUPPORTED = True
-except ImportError:
+else:
     POSTGRES_SUPPORTED = False
 
 
 class FieldTemplateManager:
-    cached_mappings = dict()
+    cached_mappings: Dict[str, Type[ft.BaseFieldTemplate | ft.ArrayFieldTemplate]] = dict()
     mappings = _mappings
 
     @classmethod
-    def get_field_template_instance(cls, field_instance: models.Field) -> ft.BaseFieldTemplate:
+    def get_field_template_instance(cls, field_instance: models.Field) -> ft.BaseFieldTemplate | ft.ArrayFieldTemplate:
         field_template_cls = cls._get_field_template_cls(type(field_instance))
         if POSTGRES_SUPPORTED:
             if isinstance(field_instance, pg_fields.ArrayField):
                 base_field_template = cls.get_field_template_instance(field_instance.base_field)
+                assert issubclass(field_template_cls, ft.ArrayFieldTemplate)
                 return field_template_cls(field_instance, base_field_template)
 
         return field_template_cls(field_instance)
