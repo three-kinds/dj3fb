@@ -60,7 +60,7 @@ class GenerateFactoriesService:
 
         template = FactoryTemplate()
 
-        # 分析fields
+        # fields
         common_fields = dict()
         fk_fields = dict()
         m2m_fields = dict()

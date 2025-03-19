@@ -14,8 +14,10 @@ class Actor(models.Model):
 
 class Licence(models.Model):
     content = models.CharField(max_length=32)
-    category = models.CharField(choices=[('A', 'A'), ('B', 'B'), ('C', 'C')], max_length=1)
+    category = models.CharField(choices=[("A", "A"), ("B", "B"), ("C", "C")], max_length=1)
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    is_active = models.BooleanField()
+    email = models.EmailField()
     duration = models.DurationField()
     file = models.FileField()
     image = models.ImageField()
@@ -44,5 +46,4 @@ class Movie(models.Model):
 class Cinema(models.Model):
     int_array = ArrayField(models.IntegerField(), size=5)
     int_choice_array = ArrayField(models.IntegerField(choices=[(i, i) for i in range(10)]), size=5)
-    char_choice_array = ArrayField(models.CharField(choices=[('A', 'A'), ('B', 'B')], max_length=1))
-
+    char_choice_array = ArrayField(models.CharField(choices=[("A", "A"), ("B", "B")], max_length=1))

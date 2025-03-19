@@ -49,7 +49,8 @@ DJ3FB = {
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
-    ]
+    ],
+    "existed_factories": {"django.contrib.auth.User": "test_app.UserFactory"},
 }
 
 
