@@ -222,6 +222,7 @@ class UUIDFieldTemplate(BaseFieldTemplate):
 
 # pg_fields
 
+
 class ArrayFieldTemplate(BaseFieldTemplate):
     if TYPE_CHECKING:
         field: pg_fields.ArrayField

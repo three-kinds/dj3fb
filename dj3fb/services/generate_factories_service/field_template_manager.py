@@ -35,10 +35,13 @@ _mappings: Dict[Type[models.Field], Type[ft.BaseFieldTemplate]] = {
 try:
     import psycopg2
     from django.contrib.postgres import fields as pg_fields
-    _mappings.update({
-        # pg_fields
-        pg_fields.ArrayField: ft.ArrayFieldTemplate,
-    })
+
+    _mappings.update(
+        {
+            # pg_fields
+            pg_fields.ArrayField: ft.ArrayFieldTemplate,
+        }
+    )
     POSTGRES_SUPPORTED = True
 except ImportError:
     POSTGRES_SUPPORTED = False
